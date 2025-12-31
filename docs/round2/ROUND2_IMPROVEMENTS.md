@@ -754,7 +754,7 @@ gantt
     Model Fine-tuning        :ai1, 2026-01-08, 1d
     Ensemble Learning        :ai2, 2026-01-09, 1d
     PDF Reports              :report1, 2026-01-09, 1d
-    Dashboard Enhancement    :report2, 2026-01-09, 1d
+    Dashboard Update         :report2, 2026-01-09, 1d
 ```
 
 | Date | Focus Area | Deliverables | Status |
