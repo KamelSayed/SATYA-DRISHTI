@@ -135,8 +135,6 @@ SATYA-DRISHTI/
 └── 📄 run.sh                        # ▶️ Run script
 ```
 
----
-
 ## 📸 Screenshots
 
 <table>
