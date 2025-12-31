@@ -374,6 +374,8 @@ curl -X POST http://localhost:8001/analyze/ \
 > **Timeline**: Today to January 15, 2025 (Submission Deadline)  
 > **Development Period**: ~10 days
 
+📄 **[View Detailed Round 2 Implementation Plan with Code Examples →](docs/round2/ROUND2_IMPROVEMENTS.md)**
+
 ### 🎯 Advanced Enhancements for Round 2
 
 #### 1. 🔗 Real Government API Integration
