@@ -48,11 +48,13 @@ transformers_cache/
 .ipynb_checkpoints
 *.ipynb
 
-# Environment Variables
+# Environment Variables - CRITICAL
 .env
 .env.local
 .env.*.local
 *.env
+.env.production
+.env.development
 
 # IDEs
 .vscode/
@@ -107,12 +109,13 @@ tmp/
 *.tar.gz
 *.rar
 
-# Secrets & Keys
+# Secrets & Keys - CRITICAL
 *.pem
 *.key
 *.cert
 secrets/
 credentials/
+config/secrets.py
 
 # MongoDB
 *.mongodb

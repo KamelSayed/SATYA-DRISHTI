@@ -2,11 +2,14 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo import MongoClient
 from datetime import datetime
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class MongoDB:
     def __init__(self):
-        # MongoDB Atlas connection string
-        self.connection_string = "mongodb+srv://AdminSD:onpDYSkRaDUjptrs@sd.fqozxem.mongodb.net/?appName=SD"
+        # MongoDB Atlas connection string from environment variable
+        self.connection_string = os.getenv("MONGODB_URI", "mongodb://localhost:27017/satya_drishti")
         self.client = None
         self.db = None
         
