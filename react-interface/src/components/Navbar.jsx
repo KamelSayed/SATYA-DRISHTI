@@ -17,7 +17,7 @@ function Navbar({ onSectionChange, currentSection }) {
           <img src={emblem} alt="Government of India" className="govt-logo" />
           <div className="brand-text">
             <span className="brand-name">SATYA-DRISHTI</span>
-            <span className="brand-tagline">AI-Powered Content Moderation</span>
+            <span className="brand-tagline">Digital Suraksha Framework</span>
           </div>
         </div>
         <div className="nav-links">

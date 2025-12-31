@@ -9,6 +9,8 @@ import About from './components/About.jsx';
 import Contact from './components/Contact.jsx';
 import GovernanceDashboard from './components/GovernanceDashboard.jsx';
 import LoadingScreen from './components/LoadingScreen.jsx';
+import Lottie from 'lottie-react';
+import securityAnimation from './Security.json';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8001';
 
@@ -23,7 +25,6 @@ function App() {
   const [imageLoading, setImageLoading] = useState(false);
   const [imageResult, setImageResult] = useState(null);
   const [flash, setFlash] = useState({ show: false, message: '', type: '' });
-  const [analysisStep, setAnalysisStep] = useState('');
 
   const showFlash = (message, type) => {
     setFlash({ show: true, message, type });
@@ -45,19 +46,6 @@ function App() {
     setLoading(true);
     setError('');
     setResult(null);
-    setAnalysisStep('scraping');
-    
-    // Simulate pipeline steps
-    const steps = ['scraping', 'sentiment', 'toxicity', 'hate', 'categories', 'intent', 'nsfw', 'images', 'complete'];
-    let stepIndex = 0;
-    const stepInterval = setInterval(() => {
-      stepIndex++;
-      if (stepIndex < steps.length) {
-        setAnalysisStep(steps[stepIndex]);
-      } else {
-        clearInterval(stepInterval);
-      }
-    }, 2000);
 
     try {
       const response = await axios.post(`${API_URL}/analyze/`, {
@@ -65,31 +53,17 @@ function App() {
         deep_analysis: false
       });
 
-      clearInterval(stepInterval);
       if (response.data.status === 'error') {
         showFlash('Error - Link not Working', 'error');
       } else {
-        console.log('Analysis Result:', response.data);
-        console.log('Image Analysis:', response.data.image_analysis);
-        setAnalysisStep('complete');
-        setTimeout(() => {
-          setResult(response.data);
-          showFlash('Analysis completed successfully!', 'success');
-        }, 500);
+        setResult(response.data);
+        showFlash('Analysis completed successfully!', 'success');
       }
     } catch (err) {
-      clearInterval(stepInterval);
       showFlash('Error - Link not Working', 'error');
     } finally {
       setLoading(false);
-      setAnalysisStep('');
     }
-  };
-
-  const getProgressPercentage = () => {
-    const steps = ['scraping', 'sentiment', 'toxicity', 'hate', 'categories', 'intent', 'nsfw', 'images', 'complete'];
-    const index = steps.indexOf(analysisStep);
-    return index >= 0 ? ((index + 1) / steps.length) * 100 : 0;
   };
 
   const analyzeImage = async () => {
@@ -133,9 +107,9 @@ function App() {
           <>
             <header className="header">
               <h1 className="header-title">
-                <span className="title-text">Content Analysis Hub</span>
+                <span className="title-text">Intelligent Content Moderation</span>
               </h1>
-              <p className="header-subtitle">AI-Powered Safety Analysis for Digital India</p>
+              <p className="header-subtitle">Protecting Digital India with AI-Powered Safety Analysis</p>
               <div className="header-stats">
                 <div className="stat-item">
                   <span className="stat-number">12</span>
@@ -168,70 +142,30 @@ function App() {
 
             {loading && (
               <div className="loading">
-                <div className="analysis-pipeline">
-                  <h3>AI Analysis in Progress</h3>
-                  <div className="pipeline-steps">
-                    <div className={`step ${analysisStep === 'scraping' ? 'active' : analysisStep ? 'completed' : ''}`}>
-                      <div className="step-icon">→</div>
-                      <div className="step-info">
-                        <div className="step-title">Web Scraping</div>
-                        <div className="step-desc">Extracting content from URL</div>
+                <div className="loading-content">
+                  <div className="lottie-container">
+                    <Lottie animationData={securityAnimation} loop={true} style={{ width: 240, height: 240 }} />
+                  </div>
+                  <div className="loading-text">
+                    <h3>Analyzing Content</h3>
+                    <p>AI-Powered Security Analysis in Progress</p>
+                    <div className="loading-stats">
+                      <div className="loading-stat">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2">
+                          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                        <span>7 Text Analysis Models</span>
                       </div>
-                    </div>
-                    <div className={`step ${analysisStep === 'sentiment' ? 'active' : ['toxicity', 'hate', 'categories', 'intent', 'nsfw', 'images', 'complete'].includes(analysisStep) ? 'completed' : ''}`}>
-                      <div className="step-icon">→</div>
-                      <div className="step-info">
-                        <div className="step-title">Sentiment Analysis</div>
-                        <div className="step-desc">Detecting emotional tone</div>
-                      </div>
-                    </div>
-                    <div className={`step ${analysisStep === 'toxicity' ? 'active' : ['hate', 'categories', 'intent', 'nsfw', 'images', 'complete'].includes(analysisStep) ? 'completed' : ''}`}>
-                      <div className="step-icon">→</div>
-                      <div className="step-info">
-                        <div className="step-title">Toxicity Detection</div>
-                        <div className="step-desc">Identifying harmful language</div>
-                      </div>
-                    </div>
-                    <div className={`step ${analysisStep === 'hate' ? 'active' : ['categories', 'intent', 'nsfw', 'images', 'complete'].includes(analysisStep) ? 'completed' : ''}`}>
-                      <div className="step-icon">→</div>
-                      <div className="step-info">
-                        <div className="step-title">Hate Speech Detection</div>
-                        <div className="step-desc">Scanning for targeted hate</div>
-                      </div>
-                    </div>
-                    <div className={`step ${analysisStep === 'categories' ? 'active' : ['intent', 'nsfw', 'images', 'complete'].includes(analysisStep) ? 'completed' : ''}`}>
-                      <div className="step-icon">→</div>
-                      <div className="step-info">
-                        <div className="step-title">Content Classification</div>
-                        <div className="step-desc">18 fine-grained categories</div>
-                      </div>
-                    </div>
-                    <div className={`step ${analysisStep === 'intent' ? 'active' : ['nsfw', 'images', 'complete'].includes(analysisStep) ? 'completed' : ''}`}>
-                      <div className="step-icon">→</div>
-                      <div className="step-info">
-                        <div className="step-title">Intent Detection</div>
-                        <div className="step-desc">Context-aware analysis</div>
-                      </div>
-                    </div>
-                    <div className={`step ${analysisStep === 'nsfw' ? 'active' : ['images', 'complete'].includes(analysisStep) ? 'completed' : ''}`}>
-                      <div className="step-icon">→</div>
-                      <div className="step-info">
-                        <div className="step-title">NSFW Detection</div>
-                        <div className="step-desc">Explicit content scanning</div>
-                      </div>
-                    </div>
-                    <div className={`step ${analysisStep === 'images' ? 'active' : analysisStep === 'complete' ? 'completed' : ''}`}>
-                      <div className="step-icon">→</div>
-                      <div className="step-info">
-                        <div className="step-title">Image Analysis</div>
-                        <div className="step-desc">Visual content + OCR</div>
+                      <div className="loading-stat">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                          <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <span>5 Image Detection Models</span>
                       </div>
                     </div>
                   </div>
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: `${getProgressPercentage()}%` }}></div>
-                  </div>
-                  <p className="analysis-status">Processing with 7 AI models...</p>
                 </div>
               </div>
             )}
@@ -264,8 +198,15 @@ function App() {
 
                   {imageLoading && (
                     <div className="loading">
-                      <div className="spinner"></div>
-                      <p>Analyzing image...</p>
+                      <div className="loading-content">
+                        <div className="lottie-container">
+                          <Lottie animationData={securityAnimation} loop={true} style={{ width: 240, height: 240 }} />
+                        </div>
+                        <div className="loading-text">
+                          <h3>Analyzing Image</h3>
+                          <p>Processing with 5 AI models</p>
+                        </div>
+                      </div>
                     </div>
                   )}
 
@@ -388,21 +329,23 @@ function App() {
   };
 
   return (
-    <>
+    <div className="app">
       {showLoading && <LoadingScreen onComplete={() => setShowLoading(false)} />}
-      <div className="app">
-        {flash.show && (
-          <div className={`flash-message ${flash.type}`}>
-            {flash.type === 'error' ? 'Error' : 'Success'} {flash.message}
+      {!showLoading && (
+        <>
+          {flash.show && (
+            <div className={`flash-message ${flash.type}`}>
+              {flash.type === 'error' ? 'Error' : 'Success'} {flash.message}
+            </div>
+          )}
+          <Navbar onSectionChange={setCurrentSection} currentSection={currentSection} />
+          <div className="container">
+            {renderContent()}
           </div>
-        )}
-        <Navbar onSectionChange={setCurrentSection} currentSection={currentSection} />
-        <div className="container">
-          {renderContent()}
-        </div>
-        <Footer />
-      </div>
-    </>
+          <Footer />
+        </>
+      )}
+    </div>
   );
 }
 

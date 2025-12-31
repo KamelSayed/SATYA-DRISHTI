@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, HttpUrl, validator
 from src.services.universal_dispatcher import UniversalAnalysisDispatcher
 from src.routers.governance import SourceVerification, MultilingualProcessor, GovernanceReporter, update_governance_stats
+from src.database.mongodb import mongodb
 import re
 
 router = APIRouter(prefix="/analyze", tags=["analysis"])
@@ -47,12 +48,26 @@ async def analyze_content(request: AnalyzeRequest):
             result["language_analysis"] = language_info
             
             # Update governance stats
-            update_governance_stats(result)
+            await update_governance_stats(result)
             
-            # Auto-generate report if CRITICAL
-            if result.get("risk_assessment", {}).get("level") in ["CRITICAL", "HIGH"]:
-                cybercell_report = GovernanceReporter.generate_cybercell_report(result)
-                result["cybercell_report"] = cybercell_report
+            # Auto-generate report for all analyses
+            cybercell_report = GovernanceReporter.generate_cybercell_report(result)
+            result["cybercell_report"] = cybercell_report
+            
+            # Save report to MongoDB
+            report_id = await mongodb.save_report(cybercell_report)
+            if report_id:
+                result["cybercell_report"]["_id"] = str(report_id)
+            
+            # Save analysis to MongoDB
+            analysis_id = await mongodb.save_analysis(result)
+            if analysis_id:
+                result["_id"] = str(analysis_id)
+            
+            # Update MongoDB stats
+            await mongodb.increment_stat("total_analyzed")
+            if result.get("risk_assessment", {}).get("level") in ["HIGH", "CRITICAL"]:
+                await mongodb.increment_stat("high_risk_detected")
         
         return result
     except ValueError as e:
