@@ -618,9 +618,10 @@ cp .env.example .env
 
 **Environment Variables (.env):**
 ```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/satya-drishti
+MONGODB_URI=mongodb+srv://your_username:your_password@your_cluster.mongodb.net/satya_drishti
 PORT=8001
 ENVIRONMENT=development
+FRONTEND_URL=http://localhost:5173
 ```
 
 #### 3️⃣ Frontend Setup

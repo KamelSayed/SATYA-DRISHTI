@@ -55,6 +55,8 @@ transformers_cache/
 *.env
 .env.production
 .env.development
+social-intel-agent/.env
+react-interface/.env
 
 # IDEs
 .vscode/
