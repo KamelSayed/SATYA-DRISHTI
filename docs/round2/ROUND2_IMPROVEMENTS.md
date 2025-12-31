@@ -741,7 +741,7 @@ gantt
     section Government APIs
     PIB API Integration       :crit, done, api1, 2026-01-01, 2d
     Bhashini Translation      :crit, done, api2, 2026-01-02, 2d
-    Database Expansion 1000+  :active, api3, 2026-01-03, 1d
+    Database Expansion        :active, api3, 2026-01-03, 1d
     section Multi-Modal
     Video Frame Analysis      :video1, 2026-01-04, 1d
     Audio Transcription       :video2, 2026-01-05, 1d

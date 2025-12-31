@@ -134,6 +134,7 @@ SATYA-DRISHTI/
 ├── 📄 INSTALL.sh                    # 🚀 Installation script
 └── 📄 run.sh                        # ▶️ Run script
 ```
+---
 
 ## 📸 Screenshots
 
