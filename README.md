@@ -448,7 +448,7 @@ curl -X POST http://localhost:8001/analyze/ \
 ```json
 {
   "analysis_id": "550e8400-e29b-41d4-a716-446655440000",
-  "timestamp": "2025-01-05T10:30:00Z",
+  "timestamp": "2025-12-05T10:30:00Z",
   "platform": "twitter",
   "url": "https://twitter.com/example/status/123456789",
   
@@ -985,7 +985,7 @@ final_prediction = (
 
 🔐 EVIDENCE HASH:
    SHA256: a3b2c1d4e5f6789...
-   Timestamp: 2025-01-05 10:30:45 IST
+   Timestamp: 2025-12-05 10:30:45 IST
 
 [Charts, Screenshots, Timeline]
 ```
@@ -1066,19 +1066,19 @@ gantt
     title Round 2 Implementation Sprint (9 Days)
     dateFormat  YYYY-MM-DD
     section APIs
-    PIB API Integration       :crit, done, api1, 2025-01-01, 2d
-    Bhashini Translation      :crit, done, api2, 2025-01-02, 2d
-    Database 1000+ entries    :active, api3, 2025-01-03, 1d
+    PIB API Integration       :crit, done, api1, 2025-12-01, 2d
+    Bhashini Translation      :crit, done, api2, 2025-12-02, 2d
+    Database 1000+ entries    :active, api3, 2025-12-03, 1d
     section Video/Audio
-    Video Frame Analysis      :video1, 2025-01-04, 1d
-    Audio Transcription       :video2, 2025-01-05, 1d
-    Deepfake Detection        :video3, 2025-01-06, 1d
+    Video Frame Analysis      :video1, 2025-12-04, 1d
+    Audio Transcription       :video2, 2025-12-05, 1d
+    Deepfake Detection        :video3, 2025-12-06, 1d
     section Security
-    JWT + Redis Cache         :sec1, 2025-01-07, 1d
-    Nginx Load Balancer       :sec2, 2025-01-08, 1d
+    JWT + Redis Cache         :sec1, 2025-12-07, 1d
+    Nginx Load Balancer       :sec2, 2025-12-08, 1d
     section AI
-    Model Fine-tuning         :ai1, 2025-01-08, 1d
-    PDF + Dashboard           :report1, 2025-01-09, 1d
+    Model Fine-tuning         :ai1, 2025-12-08, 1d
+    PDF + Dashboard           :report1, 2025-12-09, 1d
 ```
 
 <table>
