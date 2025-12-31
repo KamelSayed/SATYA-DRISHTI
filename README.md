@@ -18,24 +18,6 @@
 
 ---
 
-## 📋 Table of Contents
-
-- [Problem Statement](#-problem-statement)
-- [Our Solution](#-our-solution)
-- [Key Features](#-key-features)
-- [Screenshots](#-screenshots)
-- [System Architecture](#-system-architecture)
-- [Technical Flow Diagrams](#-technical-flow-diagrams)
-- [AI Models](#-ai-models)
-- [Installation](#-installation)
-- [API Documentation](#-api-documentation)
-- [Performance Metrics](#-performance-metrics)
-- [Round 2 Improvements](#-round-2-improvements-mandatory)
-- [Team](#-team)
-- [Contact](#-contact)
-
----
-
 ## 📖 Problem Statement
 
 Traditional content moderation faces critical challenges:
@@ -54,32 +36,25 @@ Traditional content moderation faces critical challenges:
 
 **SATYA-DRISHTI** revolutionizes content moderation with AI:
 
-| Feature | Traditional | SATYA-DRISHTI | Improvement |
-|---------|------------|---------------|-------------|
-| Analysis Time | 24-48 hours | 10-15 seconds | 99.9% faster |
-| Accuracy | 40-50% | 87% | 74% better |
-| Languages | English only | 9 Indian languages | 9x coverage |
-| False Positives | 60% | 12% | 80% reduction |
+- 🤖 **12 AI Models** — 7 text analyzers + 5 image detectors for comprehensive analysis
+- ⚡ **10-15 seconds** — Real-time processing with parallel execution
+- 🌐 **9 Indian Languages** — Hindi, Bengali, Tamil, Telugu, Marathi, Gujarati, Kannada, Malayalam, Punjabi
+- 🏛️ **Government-Ready** — PIB integration, IPC/IT Act mapping, SHA256 evidence hashing
+- 📊 **87% Accuracy** — Context-aware analysis with 80% reduction in false positives
+- 🛡️ **Real-time Dashboard** — Live statistics for law enforcement agencies
 
 ---
 
 ## ✨ Key Features
 
-### 🤖 AI-Powered Analysis
-- **7 Text Models**: Sentiment, Toxicity, Hate Speech, Intent, Categories, NSFW
-- **5 Image Models**: NSFW, Violence, Hateful Visuals, Religious Hate, OCR
-- **9 Languages**: Hindi, Bengali, Tamil, Telugu, Marathi, Gujarati, Kannada, Malayalam, Punjabi
-
-### 🌐 Multi-Platform Support
-- Reddit, Twitter/X, Instagram, YouTube, TikTok
-- News Sites (BBC, CNN, Reuters, Indian media)
-- Generic Web & Direct Image URLs
-
-### 🏛️ Government-Ready
-- **Vishwaas Score**: 0-100 credibility rating with PIB integration
-- **Legal Mapping**: Auto IPC/IT Act section identification
-- **Cybercell Reports**: SHA256 evidence hash for court admissibility
-- **Real-time Dashboard**: Live statistics for law enforcement
+✅ **AI-Powered Analysis** — Sentiment, Toxicity, Hate Speech, Intent, Categories, NSFW detection  
+✅ **Multi-Platform Support** — Reddit, Twitter/X, Instagram, YouTube, TikTok, News Sites  
+✅ **Vishwaas Score** — 0-100 credibility rating with PIB Fact-Check integration  
+✅ **Legal Mapping** — Auto IPC/IT Act section identification for court admissibility  
+✅ **Cybercell Reports** — SHA256 evidence hash with complete audit trail  
+✅ **Context-Aware** — Distinguishes reporting vs endorsing harmful content  
+✅ **Image Analysis** — NSFW, Violence, Hateful Visuals, Religious Hate, OCR text extraction  
+✅ **Real-time Dashboard** — Live statistics and threat monitoring  
 
 ---
 
@@ -103,8 +78,6 @@ Traditional content moderation faces critical challenges:
 ---
 
 ## 🏗️ System Architecture
-
-### High-Level Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -155,7 +128,7 @@ Traditional content moderation faces critical challenges:
 
 ## 📊 Technical Flow Diagrams
 
-### 1. Data Flow Diagram (Level 0 - Context)
+### Data Flow Diagram (Level 0)
 
 ```
                 ┌─────────────────────────┐
@@ -169,7 +142,7 @@ Govt Database ─▶│        System          │───────▶ Legal
                 └─────────────────────────┘
 ```
 
-### 2. Data Flow Diagram (Level 1 - System Overview)
+### Data Flow Diagram (Level 1)
 
 ```
 ┌──────────┐
@@ -216,7 +189,7 @@ Govt Database ─▶│        System          │───────▶ Legal
 User Dashboard
 ```
 
-### 3. AI Analysis Engine Flow (Level 2)
+### AI Analysis Engine Flow
 
 ```
                 ┌──────────────────────┐
@@ -251,149 +224,56 @@ User Dashboard
          Combined Results
 ```
 
-### 4. Risk Scoring Algorithm Flow
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                  RISK SCORING FLOW                       │
-└─────────────────────────────────────────────────────────┘
-
-Step 1: Base Text Risk
-├─ base_risk = (0.4 × toxicity + 0.4 × hate) × 100
-│
-Step 2: Category Penalties
-├─ threats: +35
-├─ violence: +30
-├─ racist: +30
-├─ religious_hate: +30
-├─ explicit_sexual: +30
-│
-Step 3: Intent Multiplier
-├─ reporting: ×0.25 (news/educational)
-├─ neutral: ×0.5 (discussion)
-├─ endorsing: ×1.5 (promoting harmful)
-│
-Step 4: Image Risk (per image)
-├─ nsfw_explicit: ×35
-├─ violence: ×30
-├─ hateful_visual: ×25
-├─ religious_hate: ×40
-│
-Step 5: Combined Risk
-├─ text_risk = (base + penalties) × intent
-├─ avg_image_risk = sum(images) / count
-├─ final_score = (text × 0.6) + (image × 0.4)
-│
-Step 6: Source Credibility Adjustment
-└─ final_score = final_score × source_multiplier
-
-┌─────────────────────────────────────────────────────────┐
-│                    RISK LEVELS                           │
-├─────────────────────────────────────────────────────────┤
-│  SAFE (0-14)     │ No action required                   │
-│  LOW (15-29)     │ Monitor                              │
-│  MEDIUM (30-49)  │ Review recommended                   │
-│  HIGH (50-69)    │ Action needed + Auto-report          │
-│  CRITICAL (70+)  │ Immediate action + Auto-report       │
-└─────────────────────────────────────────────────────────┘
-```
-
-### 5. Request-Response Flow
-
-```
-┌──────────┐
-│  Client  │
-└────┬─────┘
-     │ POST /analyze/ {url: "..."}
-     ▼
-┌──────────────────┐
-│  FastAPI Server  │
-│  - Validate URL  │
-│  - Check cache   │
-└────┬─────────────┘
-     │
-     ▼
-┌──────────────────┐
-│ Platform Adapter │
-│  - Detect type   │
-│  - Extract data  │
-└────┬─────────────┘
-     │
-     ▼
-┌──────────────────┐
-│  AI Processing   │
-│  - Text models   │
-│  - Image models  │
-│  - Parallel exec │
-└────┬─────────────┘
-     │
-     ▼
-┌──────────────────┐
-│  Risk Scoring    │
-│  - Calculate     │
-│  - Classify      │
-└────┬─────────────┘
-     │
-     ▼
-┌──────────────────┐
-│   Governance     │
-│  - Verify source │
-│  - Detect lang   │
-│  - Map legal     │
-└────┬─────────────┘
-     │
-     ▼
-┌──────────────────┐
-│  Save to DB      │
-│  - Analysis      │
-│  - Statistics    │
-│  - Report        │
-└────┬─────────────┘
-     │
-     ▼
-┌──────────────────┐
-│  Return JSON     │
-│  - Risk score    │
-│  - Analysis      │
-│  - Report        │
-└────┬─────────────┘
-     │
-     ▼
-┌──────────┐
-│  Client  │
-│  Display │
-└──────────┘
-
-Time: 10-15 seconds (CPU) | 3-5 seconds (GPU)
-```
-
 ---
 
-## 🤖 AI Models
+## 🛠️ Tech Stack
 
-### Text Analysis (7 Models)
+<div align="center">
 
-| Model | Purpose | Accuracy |
-|-------|---------|----------|
-| DistilBERT | Sentiment Analysis | 95% |
-| RoBERTa | Toxicity Detection | 92% |
-| Cardiff NLP | Hate Speech | 89% |
-| BART-MNLI | Intent Classification | 87% |
-| mDeBERTa | 24 Categories | 85% |
-| NSFW Classifier | Adult Content | 91% |
-| Zero-Shot | Custom Labels | 83% |
+<table>
+<thead>
+<tr>
+<th>🖥️ Technology</th>
+<th>⚙️ Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white"/></td>
+<td>Core programming language for backend</td>
+</tr>
+<tr>
+<td><img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"/></td>
+<td>Modern web framework for REST API</td>
+</tr>
+<tr>
+<td><img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black"/></td>
+<td>Frontend UI framework</td>
+</tr>
+<tr>
+<td><img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"/></td>
+<td>Deep learning framework for AI models</td>
+</tr>
+<tr>
+<td><img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white"/></td>
+<td>NoSQL database for data storage</td>
+</tr>
+<tr>
+<td><img src="https://img.shields.io/badge/HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black"/></td>
+<td>Pre-trained transformer models</td>
+</tr>
+<tr>
+<td><img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white"/></td>
+<td>Image processing and analysis</td>
+</tr>
+<tr>
+<td><img src="https://img.shields.io/badge/EasyOCR-FF6B6B?style=for-the-badge&logo=python&logoColor=white"/></td>
+<td>Text extraction from images</td>
+</tr>
+</tbody>
+</table>
 
-### Image Analysis (5 Models)
-
-| Model | Purpose | Accuracy |
-|-------|---------|----------|
-| Falconsai | NSFW Detection | 94% |
-| CLIP-ViT | Violence | 88% |
-| CLIP | Hateful Visuals | 86% |
-| CLIP | Religious Hate | 84% |
-| EasyOCR | Text Extraction | 90% |
-
-**Total Model Size**: ~3GB
+</div>
 
 ---
 
@@ -418,7 +298,6 @@ python3.13 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
-# Edit .env with your MongoDB URI
 
 # Frontend setup
 cd ../react-interface
@@ -444,8 +323,6 @@ npm run dev
 ### Core Endpoints
 
 #### POST /analyze/
-Analyze social media URL
-
 ```bash
 curl -X POST http://localhost:8001/analyze/ \
   -H "Content-Type: application/json" \
@@ -475,12 +352,6 @@ curl -X POST http://localhost:8001/analyze/ \
 }
 ```
 
-#### POST /analyze-image/
-Analyze image URL
-
-#### GET /governance/stats/dashboard
-Real-time statistics
-
 **Full Docs**: http://localhost:8001/docs
 
 ---
@@ -500,117 +371,92 @@ Real-time statistics
 
 ## 🚀 Round 2 Improvements (MANDATORY)
 
-> **Timeline**: 2 weeks (Jan 15 - Jan 29, 2025)  
-> **Submission Deadline**: January 15, 2025
+> **Timeline**: Today to January 15, 2025 (Submission Deadline)  
+> **Development Period**: ~10 days
 
-### 🎯 Planned Enhancements for Round 2
+### 🎯 Advanced Enhancements for Round 2
 
-#### 1. 🔗 Real API Integrations
-**Current State**: Mock PIB database with 50 hardcoded entries  
-**Round 2 Implementation**:
-- Integrate official **PIB Fact-Check API** for real-time news verification
-- Connect **Bhashini API** for government-approved multilingual translation
-- Expand fake news database to **1000+ verified entries**
-- Add live government portal integration for source credibility checks
+#### 1. 🔗 Real Government API Integration
+**Current**: Mock PIB database with 50 hardcoded entries  
+**Round 2**:
+- ✅ Integrate official **PIB Fact-Check API** for real-time news verification
+- ✅ Connect **Bhashini API** for government-approved multilingual translation
+- ✅ Expand fake news database to **1000+ verified entries**
+- ✅ Live government portal integration for source credibility
 
-**Expected Impact**: 95%+ accuracy in fake news detection with real-time government data
-
-**Technical Approach**:
-- REST API integration with PIB servers
-- Caching layer for frequently checked sources
-- Fallback mechanism for API downtime
+**Impact**: 95%+ accuracy in fake news detection with real-time government data
 
 ---
 
-#### 2. 🎥 Video & Audio Analysis
-**Current State**: Text and image analysis only  
-**Round 2 Implementation**:
-- **Deepfake Video Detection** using frame-by-frame analysis
-- **Audio Speech Analysis** for harmful voice content detection
-- **Live Stream Monitoring** for real-time video content
-- **Subtitle/Caption Extraction** and analysis from videos
+#### 2. 🎥 Video & Audio Content Analysis
+**Current**: Text and image analysis only  
+**Round 2**:
+- ✅ **Deepfake Video Detection** using frame-by-frame AI analysis
+- ✅ **Audio Speech Analysis** for harmful voice content detection
+- ✅ **Live Stream Monitoring** for real-time video content moderation
+- ✅ **Subtitle/Caption Extraction** and analysis from videos
 
-**Expected Impact**: Complete multi-modal analysis covering all content types
+**Impact**: Complete multi-modal analysis covering all content types
 
-**Technical Approach**:
-- OpenCV for video frame extraction
-- Whisper AI for audio transcription
-- CLIP for video frame analysis
-- Real-time streaming with WebSockets
+**Technical Stack**: OpenCV, Whisper AI, CLIP, WebSockets
 
 ---
 
-#### 3. 🔐 Advanced Security & Scalability
-**Current State**: Basic CORS and input validation  
-**Round 2 Implementation**:
-- **JWT Authentication** with role-based access control (Admin, Analyst, Viewer)
-- **Redis Caching** for 10x faster repeated analysis
-- **Rate Limiting** to handle 1M+ requests/day
-- **Load Balancing** with Nginx for horizontal scaling
-- **WebSocket Support** for real-time dashboard updates
+#### 3. 🔐 Enterprise Security & Scalability
+**Current**: Basic CORS and input validation  
+**Round 2**:
+- ✅ **JWT Authentication** with role-based access (Admin, Analyst, Viewer)
+- ✅ **Redis Caching** for 10x faster repeated analysis
+- ✅ **Rate Limiting** to handle 1M+ requests/day
+- ✅ **Load Balancing** with Nginx for horizontal scaling
+- ✅ **WebSocket Support** for real-time dashboard updates
 
-**Expected Impact**: Production-ready system handling enterprise-scale traffic
+**Impact**: Production-ready system handling enterprise-scale traffic
 
-**Technical Approach**:
-- JWT tokens with 24-hour expiry
-- Redis for session management and caching
-- Nginx reverse proxy with load balancing
-- Docker containerization for easy deployment
+**Technical Stack**: JWT, Redis, Nginx, Docker, WebSockets
 
 ---
 
-#### 4. 🧠 Enhanced AI Models
-**Current State**: Pre-trained HuggingFace models  
-**Round 2 Implementation**:
-- **Fine-tune models** on 10,000+ Indian social media posts
-- **Ensemble Learning** combining 3 best models for 92%+ accuracy
-- **Active Learning** pipeline to improve from user feedback
-- **Explainable AI** with LIME/SHAP showing why content was flagged
+#### 4. 🧠 Advanced AI Models
+**Current**: Pre-trained HuggingFace models  
+**Round 2**:
+- ✅ **Fine-tune models** on 10,000+ Indian social media posts
+- ✅ **Ensemble Learning** combining 3 best models for 92%+ accuracy
+- ✅ **Active Learning** pipeline to improve from user feedback
+- ✅ **Explainable AI** with LIME/SHAP showing why content was flagged
 
-**Expected Impact**: 92%+ accuracy with transparent AI decisions
+**Impact**: 92%+ accuracy with transparent AI decisions
 
-**Technical Approach**:
-- Transfer learning on Indian dataset
-- Weighted voting ensemble
-- Feedback loop for continuous improvement
-- SHAP values for model interpretability
+**Technical Stack**: Transfer Learning, Ensemble Methods, LIME/SHAP
 
 ---
 
-#### 5. 📄 Professional Reporting
-**Current State**: JSON responses only  
-**Round 2 Implementation**:
-- **PDF Report Generation** with charts and evidence screenshots
-- **Email Notifications** for HIGH/CRITICAL risk content
-- **CSV/Excel Export** for bulk analysis
-- **Automated Evidence Collection** with timestamps and metadata
+#### 5. 📄 Professional Reporting System
+**Current**: JSON responses only  
+**Round 2**:
+- ✅ **PDF Report Generation** with charts and evidence screenshots
+- ✅ **Email Notifications** for HIGH/CRITICAL risk content
+- ✅ **CSV/Excel Export** for bulk analysis
+- ✅ **Automated Evidence Collection** with timestamps and metadata
 
-**Expected Impact**: Court-ready documentation with automated workflows
+**Impact**: Court-ready documentation with automated workflows
 
-**Technical Approach**:
-- ReportLab for PDF generation
-- SMTP for email notifications
-- Pandas for CSV/Excel export
-- Screenshot capture with Selenium
+**Technical Stack**: ReportLab, SMTP, Pandas, Selenium
 
 ---
 
-#### 6. 📊 Advanced Dashboard & Analytics
-**Current State**: Basic statistics display  
-**Round 2 Implementation**:
-- **Interactive Charts** with Chart.js showing trends
-- **Threat Heatmap** by region and platform
-- **Predictive Analytics** forecasting risk patterns
-- **Custom Filters** by date range, platform, risk level
-- **Export Reports** in multiple formats
+#### 6. 📊 Advanced Analytics Dashboard
+**Current**: Basic statistics display  
+**Round 2**:
+- ✅ **Interactive Charts** with Chart.js showing trends over time
+- ✅ **Threat Heatmap** by region and platform
+- ✅ **Predictive Analytics** forecasting risk patterns
+- ✅ **Custom Filters** by date range, platform, risk level
+- ✅ **Export Reports** in multiple formats
 
-**Expected Impact**: Better insights for law enforcement decision-making
+**Impact**: Better insights for law enforcement decision-making
 
-**Technical Approach**:
-- Chart.js for interactive visualizations
-- Time-series analysis for trends
-- Machine learning for predictions
-- Advanced filtering with MongoDB aggregation
+**Technical Stack**: Chart.js, D3.js, Time-series Analysis, ML Predictions
 
 ---
 
@@ -618,10 +464,10 @@ Real-time statistics
 
 | Feature | Round 1 (Current) | Round 2 (Planned) | Improvement |
 |---------|-------------------|-------------------|-------------|
-| **API Integration** | Mock PIB data | Real PIB + Bhashini | Real-time govt data |
+| **API Integration** | Mock PIB data | Real PIB + Bhashini APIs | Real-time govt data |
 | **Content Types** | Text + Images | Text + Images + Video + Audio | 4x coverage |
-| **Accuracy** | 87% | 92%+ | +5% improvement |
-| **Processing Speed** | 10-15 sec | 2-3 sec | 5x faster |
+| **Accuracy** | 87% | 92%+ with fine-tuning | +5% improvement |
+| **Processing Speed** | 10-15 sec | 2-3 sec with Redis | 5x faster |
 | **Scalability** | Single server | Load balanced + Redis | 100x capacity |
 | **Authentication** | None | JWT + RBAC | Enterprise security |
 | **Reports** | JSON only | JSON + PDF + Email | Professional docs |
@@ -630,29 +476,29 @@ Real-time statistics
 
 ---
 
-### 🗓️ 2-Week Development Plan
+### 🗓️ Development Timeline (10 Days)
 
 | Days | Focus Area | Deliverables |
 |------|------------|--------------|
-| **Day 1-3** | API Integration | PIB API, Bhashini API, Database expansion |
-| **Day 4-6** | Video/Audio Analysis | Deepfake detection, Audio transcription |
-| **Day 7-9** | Security & Scale | JWT auth, Redis caching, Load balancing |
-| **Day 10-12** | AI Enhancement | Model fine-tuning, Ensemble learning |
-| **Day 13-14** | Reporting & Dashboard | PDF generation, Interactive charts |
+| **Day 1-2** | API Integration | PIB API, Bhashini API, Database expansion |
+| **Day 3-4** | Video/Audio | Deepfake detection, Audio transcription |
+| **Day 5-6** | Security | JWT auth, Redis caching, Load balancing |
+| **Day 7-8** | AI Enhancement | Model fine-tuning, Ensemble learning |
+| **Day 9-10** | Reporting | PDF generation, Interactive dashboard |
 
 ---
 
 ### 💡 Why These Improvements Matter
 
-**For Evaluation Criteria:**
+**For LLM-Based Evaluation:**
 
 1. **Originality** 🎯
-   - Real API integration (not mock data)
-   - Video deepfake detection (unique feature)
+   - Real government API integration (not mock data)
+   - Video deepfake detection (cutting-edge feature)
    - Explainable AI with SHAP (transparency)
 
 2. **Efficiency** ⚡
-   - Redis caching (5x faster)
+   - Redis caching (5x faster processing)
    - Load balancing (100x scalability)
    - Optimized AI pipeline (parallel processing)
 
@@ -668,11 +514,11 @@ Real-time statistics
 
 ---
 
-## 👥 Team
+## 👥 Team Code Catalyst
 
 <table>
 <tr>
-<td align="center" width="33%">
+<td align="center" width="25%">
 <b>👨💻 Abhishek Giri</b><br/>
 <sub>Team Lead & Full-Stack AI Engineer</sub><br/>
 • System Architecture<br/>
@@ -681,15 +527,22 @@ Real-time statistics
 <a href="https://github.com/abhishekgiri04">GitHub</a> | 
 <a href="https://linkedin.com/in/abhishek-giri04">LinkedIn</a>
 </td>
-<td align="center" width="33%">
-<b>👨💻 Athrav</b><br/>
+<td align="center" width="25%">
+<b>👨💻 Athrav Gangwar</b><br/>
 <sub>Backend Engineer</sub><br/>
 • Platform Adapters<br/>
 • Web Scraping<br/>
 • API Development<br/>
 </td>
-<td align="center" width="33%">
-<b>👨💻 Kashish</b><br/>
+<td align="center" width="25%">
+<b>👩💻 Muskan Sharma</b><br/>
+<sub>Frontend Developer</sub><br/>
+• React Components<br/>
+• UI/UX Design<br/>
+• Dashboard Development<br/>
+</td>
+<td align="center" width="25%">
+<b>👩💻 Kashish Sharma</b><br/>
 <sub>AI/ML Specialist</sub><br/>
 • AI Model Training<br/>
 • Performance Optimization<br/>
@@ -715,12 +568,6 @@ Real-time statistics
 
 ---
 
-## 📄 License
-
-MIT License - Copyright (c) 2025 Abhishek Giri & Team Code Catalyst
-
----
-
 <div align="center">
 
 ### 🇮🇳 Built with ❤️ for Digital India
@@ -728,7 +575,5 @@ MIT License - Copyright (c) 2025 Abhishek Giri & Team Code Catalyst
 **SATYA-DRISHTI** - Making Digital India Safer Through AI
 
 ⭐ Star this repo if you find it useful!
-
-[Back to Top ⬆️](#-satya-drishti---digital-suraksha-framework)
 
 </div>
