@@ -255,7 +255,7 @@ SATYA-DRISHTI/
 
 ### High-Level Architecture Overview
 
-<img src="docs/Architecture.jpeg" alt="System Architecture" width="100%" style="border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); margin-bottom: 30px;"/>
+<img src="docs/Architecture.png" alt="System Architecture" width="100%" style="border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); margin-bottom: 30px;"/>
 
 ### Detailed Architecture & Data Flow Diagrams
 
